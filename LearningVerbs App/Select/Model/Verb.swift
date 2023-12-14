@@ -13,6 +13,6 @@ struct Verb {
     let participle: String
     
     var translate: String {
-        infinitive.localized
+        NSLocalizedString(self.infinitive, comment: "")
     }
 }
