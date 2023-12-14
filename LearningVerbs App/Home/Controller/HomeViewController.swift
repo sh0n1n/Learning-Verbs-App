@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
         
         label.text = "Learning Verbs App".uppercased()
         label.font = .boldSystemFont(ofSize: 30)
-        label.textColor = .white
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
         let button = UIButton()
         
         button.setTitle("Select Verbs".localized, for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitleColor(UIColor.label, for: .normal)
         button.backgroundColor = .gray
         button.layer.cornerRadius = cornerRadius
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +37,7 @@ class HomeViewController: UIViewController {
         let button = UIButton()
         
         button.setTitle("Train Verbs".localized, for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitleColor(UIColor.label, for: .normal)
         button.backgroundColor = .gray
         button.layer.cornerRadius = cornerRadius
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +73,7 @@ class HomeViewController: UIViewController {
         view.addSubview(firstButton)
         view.addSubview(secondButton)
         
-        view.backgroundColor = .tertiaryLabel
+        view.backgroundColor = UIColor.systemBackground
         
         setUpConstraints()
     }

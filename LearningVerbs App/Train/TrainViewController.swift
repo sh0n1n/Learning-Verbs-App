@@ -13,6 +13,6 @@ final class TrainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .tertiaryLabel
+        view.backgroundColor = .systemBackground
     }
 }

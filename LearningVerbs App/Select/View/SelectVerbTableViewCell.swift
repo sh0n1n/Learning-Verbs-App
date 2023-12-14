@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class SelectVerbTableViewCell: UITableViewCell {
     
@@ -57,7 +58,7 @@ final class SelectVerbTableViewCell: UITableViewCell {
         let label = UILabel()
         
         label.font = .systemFont(ofSize: 12)
-        label.textColor = .white
+        label.textColor = UIColor.label
         
         return label
     }()
@@ -89,9 +90,19 @@ final class SelectVerbTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
+    func configure(with verb: Verb) {
+        infinitiveLabel.text = verb.infinitive
+        translationLabel.text = verb.translate
+        pastLabel.text = verb.pastSimple
+        participleLabel.text = verb.participle
+        
+    }
+    
     // MARK: - Private Methods
     func setupUI() {
-        stackView.addArrangedSubview(<#T##view: UIView##UIView#>)
+        infinitiveView.addSubviews([infinitiveLabel, translationLabel])
+        stackView.addArrangedSubviews([infinitiveView, pastLabel, participleLabel])
         addSubviews([checkboxImageView, stackView])
         
         
@@ -99,6 +110,28 @@ final class SelectVerbTableViewCell: UITableViewCell {
     }
     
     func setupConstraints() {
+        checkboxImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(20)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(20)
+        }
         
+        infinitiveLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        translationLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(infinitiveLabel.snp.bottom).offset(0)
+        }
+        
+        infinitiveView.snp.makeConstraints { make in
+            make.height.equalTo(69)
+        }
+        
+        stackView.snp.makeConstraints { make in
+            make.leading.equalTo(checkboxImageView.snp.trailing).offset(5)
+            make.top.right.bottom.equalToSuperview()
+        }
     }
 }
