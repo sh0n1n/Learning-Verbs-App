@@ -19,6 +19,7 @@
 		8D5715552B29030400CFC987 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8D5715542B29030400CFC987 /* SnapKit-Dynamic */; };
 		8D5715782B29105300CFC987 /* SelectVerbTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5715772B29105300CFC987 /* SelectVerbTableViewCell.swift */; };
 		8DC75B6E2B2BA9CD00FC45B4 /* UIView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC75B6D2B2BA9CD00FC45B4 /* UIView+Ex.swift */; };
+		8DC75B702B2BAACF00FC45B4 /* UIStackView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC75B6F2B2BAACF00FC45B4 /* UIStackView+Ex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		8D57154D2B28F8CB00CFC987 /* TrainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainViewController.swift; sourceTree = "<group>"; };
 		8D5715772B29105300CFC987 /* SelectVerbTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVerbTableViewCell.swift; sourceTree = "<group>"; };
 		8DC75B6D2B2BA9CD00FC45B4 /* UIView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ex.swift"; sourceTree = "<group>"; };
+		8DC75B6F2B2BAACF00FC45B4 /* UIStackView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			children = (
 				8D57153F2B28EEF000CFC987 /* String+Ex.swift */,
 				8DC75B6D2B2BA9CD00FC45B4 /* UIView+Ex.swift */,
+				8DC75B6F2B2BAACF00FC45B4 /* UIStackView+Ex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				8D57154E2B28F8CB00CFC987 /* TrainViewController.swift in Sources */,
 				8D57152C2B28EA8B00CFC987 /* AppDelegate.swift in Sources */,
 				8D57154C2B28F8A700CFC987 /* SelectVerbsViewController.swift in Sources */,
+				8DC75B702B2BAACF00FC45B4 /* UIStackView+Ex.swift in Sources */,
 				8DC75B6E2B2BA9CD00FC45B4 /* UIView+Ex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
