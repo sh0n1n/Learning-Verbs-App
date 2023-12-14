@@ -9,7 +9,7 @@ import Foundation
 
 class IrregularVerbs {
     private(set) var verbs: [Verb] = []
-    let selectedVerbs: [Verb] = []
+    var selectedVerbs: [Verb] = []
     
     func configureVerbs() {
         verbs = [

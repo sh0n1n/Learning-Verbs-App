@@ -67,6 +67,7 @@ final class SelectVerbTableViewCell: UITableViewCell {
         let label = UILabel()
         
         label.font = .systemFont(ofSize: 16)
+        label.textAlignment = .center
         
         return label
     }()
@@ -75,6 +76,7 @@ final class SelectVerbTableViewCell: UITableViewCell {
         let label = UILabel()
         
         label.font = .systemFont(ofSize: 16)
+        label.textAlignment = .center
         
         return label
     }()
@@ -91,16 +93,19 @@ final class SelectVerbTableViewCell: UITableViewCell {
     }
     
     // MARK: - Methods
-    func configure(with verb: Verb) {
+    func configure(with verb: Verb, isSelected: Bool) {
         infinitiveLabel.text = verb.infinitive
         translationLabel.text = verb.translate
         pastLabel.text = verb.pastSimple
         participleLabel.text = verb.participle
         
+        
+        checkboxImageView.image = isSelected ? State.select.image : State.unselect.image
     }
     
     // MARK: - Private Methods
     func setupUI() {
+        selectionStyle = .none
         infinitiveView.addSubviews([infinitiveLabel, translationLabel])
         stackView.addArrangedSubviews([infinitiveView, pastLabel, participleLabel])
         addSubviews([checkboxImageView, stackView])

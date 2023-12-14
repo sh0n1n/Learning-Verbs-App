@@ -15,9 +15,15 @@ final class SelectVerbsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Select Verbs".localized
         view.backgroundColor = .tertiaryLabel
         tableView.register(SelectVerbTableViewCell.self, forCellReuseIdentifier: "SelectVerbTableViewCell")
         dataSource.configureVerbs()
+    }
+    
+    // MARK: - Private Methods
+    private func isSelected(verb: Verb) -> Bool {
+        dataSource.selectedVerbs.contains(where: { $0.infinitive == verb.infinitive})
     }
 }
 
@@ -31,7 +37,8 @@ extension SelectVerbsViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectVerbTableViewCell", for: indexPath) as? SelectVerbTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(with: dataSource.verbs[indexPath.row])
+        let verb = dataSource.verbs[indexPath.row]
+        cell.configure(with: verb, isSelected: isSelected(verb: verb))
         
         return cell
     }
@@ -39,5 +46,9 @@ extension SelectVerbsViewController {
 
 // MARK: - UITableViewDelegate
 extension SelectVerbsViewController {
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let verb = dataSource.verbs[indexPath.row]
+        dataSource.selectedVerbs.append(verb)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
 }
