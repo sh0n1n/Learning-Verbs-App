@@ -20,6 +20,8 @@
 		8D5715782B29105300CFC987 /* SelectVerbTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5715772B29105300CFC987 /* SelectVerbTableViewCell.swift */; };
 		8DC75B6E2B2BA9CD00FC45B4 /* UIView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC75B6D2B2BA9CD00FC45B4 /* UIView+Ex.swift */; };
 		8DC75B702B2BAACF00FC45B4 /* UIStackView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC75B6F2B2BAACF00FC45B4 /* UIStackView+Ex.swift */; };
+		8DC75B742B2BB55100FC45B4 /* Verb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC75B732B2BB55100FC45B4 /* Verb.swift */; };
+		8DC75B762B2BB5D500FC45B4 /* IrregularVerbs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC75B752B2BB5D500FC45B4 /* IrregularVerbs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		8D5715772B29105300CFC987 /* SelectVerbTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVerbTableViewCell.swift; sourceTree = "<group>"; };
 		8DC75B6D2B2BA9CD00FC45B4 /* UIView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ex.swift"; sourceTree = "<group>"; };
 		8DC75B6F2B2BAACF00FC45B4 /* UIStackView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ex.swift"; sourceTree = "<group>"; };
+		8DC75B732B2BB55100FC45B4 /* Verb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verb.swift; sourceTree = "<group>"; };
+		8DC75B752B2BB5D500FC45B4 /* IrregularVerbs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrregularVerbs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +118,9 @@
 		8D57154F2B28F8E300CFC987 /* Select */ = {
 			isa = PBXGroup;
 			children = (
-				8D57154B2B28F8A700CFC987 /* SelectVerbsViewController.swift */,
-				8D5715772B29105300CFC987 /* SelectVerbTableViewCell.swift */,
+				8DC75B772B2BB9C700FC45B4 /* Model */,
+				8DC75B722B2BB34200FC45B4 /* Controller */,
+				8DC75B712B2BB33900FC45B4 /* View */,
 			);
 			path = Select;
 			sourceTree = "<group>";
@@ -126,6 +131,31 @@
 				8D57154D2B28F8CB00CFC987 /* TrainViewController.swift */,
 			);
 			path = Train;
+			sourceTree = "<group>";
+		};
+		8DC75B712B2BB33900FC45B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8D5715772B29105300CFC987 /* SelectVerbTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8DC75B722B2BB34200FC45B4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8D57154B2B28F8A700CFC987 /* SelectVerbsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8DC75B772B2BB9C700FC45B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8DC75B752B2BB5D500FC45B4 /* IrregularVerbs.swift */,
+				8DC75B732B2BB55100FC45B4 /* Verb.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,8 +241,10 @@
 				8D5715782B29105300CFC987 /* SelectVerbTableViewCell.swift in Sources */,
 				8D5715402B28EEF000CFC987 /* String+Ex.swift in Sources */,
 				8D5715302B28EA8B00CFC987 /* HomeViewController.swift in Sources */,
+				8DC75B742B2BB55100FC45B4 /* Verb.swift in Sources */,
 				8D57154E2B28F8CB00CFC987 /* TrainViewController.swift in Sources */,
 				8D57152C2B28EA8B00CFC987 /* AppDelegate.swift in Sources */,
+				8DC75B762B2BB5D500FC45B4 /* IrregularVerbs.swift in Sources */,
 				8D57154C2B28F8A700CFC987 /* SelectVerbsViewController.swift in Sources */,
 				8DC75B702B2BAACF00FC45B4 /* UIStackView+Ex.swift in Sources */,
 				8DC75B6E2B2BA9CD00FC45B4 /* UIView+Ex.swift in Sources */,
