@@ -91,7 +91,9 @@ final class SelectVerbTableViewCell: UITableViewCell {
     
     // MARK: - Private Methods
     func setupUI() {
+        addSubviews([checkboxImageView, stackView])
         
+        setupConstraints()
     }
     
     func setupConstraints() {
