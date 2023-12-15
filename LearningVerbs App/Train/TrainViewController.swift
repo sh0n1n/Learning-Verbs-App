@@ -99,7 +99,7 @@ final class TrainViewController: UIViewController {
     private lazy var currentVerbLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "\(score)/\(dataSource.count)".localized
+        label.text = "Verb:\(currenVerb)/\(dataSource.count)".localized
         label.font = .boldSystemFont(ofSize: 28)
         label.textColor = .label
         label.textAlignment = .center
@@ -131,6 +131,8 @@ final class TrainViewController: UIViewController {
             infinitiveLabel.text = currentVerb?.infinitive
             pastSimpleTextField.text = ""
             participleTextField.text = ""
+            checkButton.backgroundColor = .label
+            checkButton.setTitle("Check".localized, for: .normal)
         }
     }
     
@@ -142,10 +144,12 @@ final class TrainViewController: UIViewController {
     
     private var currenVerb = 1 {
         didSet {
-            currentVerbLabel.text = "\(score)/\(dataSource.count)"
+            currentVerbLabel.text = "\(currenVerb)/\(dataSource.count)"
         }
     }
-    
+
+    private var isFirstAttempt = true
+
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -173,11 +177,31 @@ final class TrainViewController: UIViewController {
     @objc
     private func checkAction() {
         if checkAnswers() {
+            if isFirstAttempt {
+                score += 1
+            }
             count += 1
+            currenVerb += 1
+            checkButton.backgroundColor = .systemGray5
+            isFirstAttempt = true
         } else {
             checkButton.backgroundColor = .red
             checkButton.setTitle("Try Again".localized, for: .normal)
+            isFirstAttempt = false
         }
+        
+        if count == dataSource.count {
+            showScoreAlert()
+        }
+    }
+    
+    private func showScoreAlert() {
+        let alertController = UIAlertController(title: "Training Completed".localized, message: "Your score is \(score)".localized, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK".localized, style: .default) { [weak self] _ in
+            self?.navigationController?.popToRootViewController(animated: true)
+        })
+
+        present(alertController, animated: true, completion: nil)
     }
     
     private func checkAnswers() -> Bool {
