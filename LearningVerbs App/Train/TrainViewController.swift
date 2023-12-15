@@ -97,6 +97,7 @@ final class TrainViewController: UIViewController {
         setupUI()
         registerForKeyboardNotofication()
         unregisterForKeyboardNotification()
+        hideKeyboardWhentappedAround()
     }
     
     // MARK: - Private Methods
@@ -176,5 +177,15 @@ private extension TrainViewController {
     @objc
     func keyboardWillHide() {
         scrollView.contentInset.bottom = .zero - 50
+    }
+    
+    func hideKeyboardWhentappedAround() {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        scrollView.addGestureRecognizer(recognizer)
+    }
+    
+    @objc
+    func hideKeyboard() {
+            scrollView.endEditing(true)
     }
 }
