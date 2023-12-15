@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
         
         button.setTitle("Select Verbs".localized, for: .normal)
         button.setTitleColor(UIColor.label, for: .normal)
-        button.backgroundColor = .gray
+        button.backgroundColor = .systemGray5
         button.layer.cornerRadius = cornerRadius
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(goToSelectViewController), for: .touchUpInside)
@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         
         button.setTitle("Train Verbs".localized, for: .normal)
         button.setTitleColor(UIColor.label, for: .normal)
-        button.backgroundColor = .gray
+        button.backgroundColor = .systemGray5
         button.layer.cornerRadius = cornerRadius
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(goToTrainViewController), for: .touchUpInside)

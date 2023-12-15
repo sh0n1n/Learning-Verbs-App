@@ -16,7 +16,7 @@ final class SelectVerbsViewController: UITableViewController {
         super.viewDidLoad()
         
         title = "Select Verbs".localized
-        view.backgroundColor = .tertiaryLabel
+        view.backgroundColor = .systemBackground
         tableView.register(SelectVerbTableViewCell.self, forCellReuseIdentifier: "SelectVerbTableViewCell")
         dataSource.configureVerbs()
     }
