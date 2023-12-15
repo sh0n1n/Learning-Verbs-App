@@ -9,7 +9,7 @@ import UIKit
 
 final class SelectVerbsViewController: UITableViewController {
     // MARK: - Properties
-    private var dataSource = IrregularVerbs()
+    private var dataSource = IrregularVerbs.shared
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -18,7 +18,6 @@ final class SelectVerbsViewController: UITableViewController {
         title = "Select Verbs".localized
         view.backgroundColor = .systemBackground
         tableView.register(SelectVerbTableViewCell.self, forCellReuseIdentifier: "SelectVerbTableViewCell")
-        dataSource.configureVerbs()
     }
     
     // MARK: - Private Methods
