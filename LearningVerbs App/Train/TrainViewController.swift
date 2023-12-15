@@ -99,7 +99,7 @@ final class TrainViewController: UIViewController {
     private lazy var currentVerbLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "Verb:\(currenVerb)/\(dataSource.count)".localized
+        label.text = "\(currenVerb)/\(dataSource.count)".localized
         label.font = .boldSystemFont(ofSize: 28)
         label.textColor = .label
         label.textAlignment = .center
