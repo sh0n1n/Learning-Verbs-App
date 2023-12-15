@@ -95,6 +95,8 @@ final class TrainViewController: UIViewController {
         title = "Train Verbs".localized
         
         setupUI()
+        registerForKeyboardNotofication()
+        unregisterForKeyboardNotification()
     }
     
     // MARK: - Private Methods
@@ -152,4 +154,27 @@ final class TrainViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 extension TrainViewController: UITextFieldDelegate {
     // TODO:
+}
+
+// MARK: - Keyboard Events
+private extension TrainViewController {
+    func registerForKeyboardNotofication() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    func unregisterForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        scrollView.contentInset.bottom = frame.height + 50
+    }
+    
+    @objc
+    func keyboardWillHide() {
+        scrollView.contentInset.bottom = .zero - 50
+    }
 }
