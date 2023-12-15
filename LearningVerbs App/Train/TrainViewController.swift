@@ -154,7 +154,13 @@ final class TrainViewController: UIViewController {
 
 // MARK: - UITextFieldDelegate
 extension TrainViewController: UITextFieldDelegate {
-    // TODO:
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if pastSimpleTextField.isFirstResponder {
+            participleTextField.becomeFirstResponder()
+        } else {
+            scrollView.endEditing(true)
+        }
+    }
 }
 
 // MARK: - Keyboard Events
