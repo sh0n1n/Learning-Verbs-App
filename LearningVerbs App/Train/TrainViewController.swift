@@ -78,13 +78,46 @@ final class TrainViewController: UIViewController {
         
         button.layer.cornerRadius = 10
         button.backgroundColor = .systemGray5
-        button.setTitle("Check", for: .normal)
+        button.setTitle("Check".localized, for: .normal)
         button.setTitleColor(UIColor.label, for: .normal)
         button.addTarget(self, action: #selector(checkAction), for: .touchUpInside)
         
         return button
     }()
     
+    private lazy var scoreLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "Score: 0".localized
+        label.font = .boldSystemFont(ofSize: 28)
+        label.textColor = .label
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    private lazy var currentVerbLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "\(score)/\(dataSource.count)".localized
+        label.font = .boldSystemFont(ofSize: 28)
+        label.textColor = .label
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    private lazy var skipButton: UIButton = {
+        let button = UIButton()
+         
+         button.layer.cornerRadius = 10
+         button.backgroundColor = .systemGray5
+        button.setTitle("Skip".localized, for: .normal)
+         button.setTitleColor(UIColor.label, for: .normal)
+         button.addTarget(self, action: #selector(checkAction), for: .touchUpInside)
+         
+         return button
+     }()
     // MARK: - Properties
     private let edgeInsets = 30
     private let dataSource = IrregularVerbs.shared.selectedVerbs
@@ -92,11 +125,24 @@ final class TrainViewController: UIViewController {
         guard dataSource.count > count else { return nil}
         return dataSource[count]
     }
+    
     private var count = 0 {
         didSet {
             infinitiveLabel.text = currentVerb?.infinitive
             pastSimpleTextField.text = ""
             participleTextField.text = ""
+        }
+    }
+    
+    private var score = 0 {
+        didSet {
+            scoreLabel.text = "Score:".localized + String(score)
+        }
+    }
+    
+    private var currenVerb = 1 {
+        didSet {
+            currentVerbLabel.text = "\(score)/\(dataSource.count)"
         }
     }
     
@@ -143,7 +189,7 @@ final class TrainViewController: UIViewController {
 
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubviews([infinitiveLabel, pastSimpleLabel, pastSimpleTextField, participleLabel, participleTextField, checkButton])
+        contentView.addSubviews([infinitiveLabel, pastSimpleLabel, pastSimpleTextField, participleLabel, participleTextField, checkButton, scoreLabel, currentVerbLabel, skipButton])
         
         setupConstraints()
     }
@@ -185,6 +231,20 @@ final class TrainViewController: UIViewController {
         checkButton.snp.makeConstraints { make in
             make.top.equalTo(participleTextField.snp.bottom).offset(100)
             make.trailing.leading.equalToSuperview().inset(edgeInsets)
+        }
+        
+        scoreLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(edgeInsets)
+        }
+        
+        currentVerbLabel.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(edgeInsets)
+            make.top.equalTo(scoreLabel)
+        }
+        
+        skipButton.snp.makeConstraints { make in
+            make.trailing.leading.equalToSuperview().inset(edgeInsets)
+            make.top.equalTo(checkButton).offset(60)
         }
     }
 }
