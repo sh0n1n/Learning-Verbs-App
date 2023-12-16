@@ -114,7 +114,7 @@ final class TrainViewController: UIViewController {
          button.backgroundColor = .systemGray5
         button.setTitle("Skip".localized, for: .normal)
          button.setTitleColor(UIColor.label, for: .normal)
-         button.addTarget(self, action: #selector(checkAction), for: .touchUpInside)
+         button.addTarget(self, action: #selector(skipAction), for: .touchUpInside)
          
          return button
      }()
@@ -192,6 +192,37 @@ final class TrainViewController: UIViewController {
         
         if count == dataSource.count {
             showScoreAlert()
+        }
+    }
+    
+    @objc
+    private func skipAction() {
+        count += 1
+        currenVerb += 1
+        isFirstAttempt = true
+        
+        if count == dataSource.count {
+            showScoreAlert()
+        } else {
+            let currentScore = score
+            
+            if let nextVerb = currentVerb {
+                pastSimpleTextField.text = nextVerb.pastSimple
+                participleTextField.text = nextVerb.participle
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {self.score = currentScore
+                    self.infinitiveLabel.text = nextVerb.infinitive
+                    self.pastSimpleTextField.text = ""
+                    self.participleTextField.text = ""
+                    
+                    // Оставляем текст "Check" и устанавливаем цвет в изначальный
+                    self.checkButton.isEnabled = false
+                    self.checkButton.backgroundColor = .systemGray5
+                    self.checkButton.setTitle("Check".localized, for: .normal)
+                    
+                    self.checkAction()
+                }
+            }
         }
     }
     
