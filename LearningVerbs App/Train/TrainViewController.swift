@@ -210,17 +210,13 @@ final class TrainViewController: UIViewController {
                 pastSimpleTextField.text = nextVerb.pastSimple
                 participleTextField.text = nextVerb.participle
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {self.score = currentScore
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {self.score = currentScore
                     self.infinitiveLabel.text = nextVerb.infinitive
                     self.pastSimpleTextField.text = ""
                     self.participleTextField.text = ""
-                    
-                    // Оставляем текст "Check" и устанавливаем цвет в изначальный
-                    self.checkButton.isEnabled = false
+                    self.checkAction()
                     self.checkButton.backgroundColor = .systemGray5
                     self.checkButton.setTitle("Check".localized, for: .normal)
-                    
-                    self.checkAction()
                 }
             }
         }
