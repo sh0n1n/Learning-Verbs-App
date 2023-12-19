@@ -78,13 +78,46 @@ final class TrainViewController: UIViewController {
         
         button.layer.cornerRadius = 10
         button.backgroundColor = .systemGray5
-        button.setTitle("Check", for: .normal)
+        button.setTitle("Check".localized, for: .normal)
         button.setTitleColor(UIColor.label, for: .normal)
         button.addTarget(self, action: #selector(checkAction), for: .touchUpInside)
         
         return button
     }()
     
+    private lazy var scoreLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "Score: 0".localized
+        label.font = .boldSystemFont(ofSize: 28)
+        label.textColor = .label
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    private lazy var currentVerbLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "\(currenVerb)/\(dataSource.count)".localized
+        label.font = .boldSystemFont(ofSize: 28)
+        label.textColor = .label
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    private lazy var skipButton: UIButton = {
+        let button = UIButton()
+         
+         button.layer.cornerRadius = 10
+         button.backgroundColor = .systemGray5
+        button.setTitle("Skip".localized, for: .normal)
+         button.setTitleColor(UIColor.label, for: .normal)
+         button.addTarget(self, action: #selector(skipAction), for: .touchUpInside)
+         
+         return button
+     }()
     // MARK: - Properties
     private let edgeInsets = 30
     private let dataSource = IrregularVerbs.shared.selectedVerbs
@@ -92,14 +125,31 @@ final class TrainViewController: UIViewController {
         guard dataSource.count > count else { return nil}
         return dataSource[count]
     }
+    
     private var count = 0 {
         didSet {
             infinitiveLabel.text = currentVerb?.infinitive
             pastSimpleTextField.text = ""
             participleTextField.text = ""
+            checkButton.backgroundColor = .label
+            checkButton.setTitle("Check".localized, for: .normal)
         }
     }
     
+    private var score = 0 {
+        didSet {
+            scoreLabel.text = "Score:".localized + String(score)
+        }
+    }
+    
+    private var currenVerb = 1 {
+        didSet {
+            currentVerbLabel.text = "\(currenVerb)/\(dataSource.count)"
+        }
+    }
+
+    private var isFirstAttempt = true
+
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,11 +177,58 @@ final class TrainViewController: UIViewController {
     @objc
     private func checkAction() {
         if checkAnswers() {
+            if isFirstAttempt {
+                score += 1
+            }
             count += 1
+            currenVerb += 1
+            checkButton.backgroundColor = .systemGray5
+            isFirstAttempt = true
         } else {
             checkButton.backgroundColor = .red
             checkButton.setTitle("Try Again".localized, for: .normal)
+            isFirstAttempt = false
         }
+        
+        if count == dataSource.count {
+            showScoreAlert()
+        }
+    }
+    
+    @objc
+    private func skipAction() {
+        count += 1
+        currenVerb += 1
+        isFirstAttempt = true
+        
+        if count == dataSource.count {
+            showScoreAlert()
+        } else {
+            let currentScore = score
+            
+            if let nextVerb = currentVerb {
+                pastSimpleTextField.text = nextVerb.pastSimple
+                participleTextField.text = nextVerb.participle
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {self.score = currentScore
+                    self.infinitiveLabel.text = nextVerb.infinitive
+                    self.pastSimpleTextField.text = ""
+                    self.participleTextField.text = ""
+                    self.checkAction()
+                    self.checkButton.backgroundColor = .systemGray5
+                    self.checkButton.setTitle("Check".localized, for: .normal)
+                }
+            }
+        }
+    }
+    
+    private func showScoreAlert() {
+        let alertController = UIAlertController(title: "Training Completed".localized, message: "Your score is \(score)".localized, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK".localized, style: .default) { [weak self] _ in
+            self?.navigationController?.popToRootViewController(animated: true)
+        })
+
+        present(alertController, animated: true, completion: nil)
     }
     
     private func checkAnswers() -> Bool {
@@ -143,7 +240,7 @@ final class TrainViewController: UIViewController {
 
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubviews([infinitiveLabel, pastSimpleLabel, pastSimpleTextField, participleLabel, participleTextField, checkButton])
+        contentView.addSubviews([infinitiveLabel, pastSimpleLabel, pastSimpleTextField, participleLabel, participleTextField, checkButton, scoreLabel, currentVerbLabel, skipButton])
         
         setupConstraints()
     }
@@ -185,6 +282,20 @@ final class TrainViewController: UIViewController {
         checkButton.snp.makeConstraints { make in
             make.top.equalTo(participleTextField.snp.bottom).offset(100)
             make.trailing.leading.equalToSuperview().inset(edgeInsets)
+        }
+        
+        scoreLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(edgeInsets)
+        }
+        
+        currentVerbLabel.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(edgeInsets)
+            make.top.equalTo(scoreLabel)
+        }
+        
+        skipButton.snp.makeConstraints { make in
+            make.trailing.leading.equalToSuperview().inset(edgeInsets)
+            make.top.equalTo(checkButton).offset(60)
         }
     }
 }
